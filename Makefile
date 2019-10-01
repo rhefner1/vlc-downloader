@@ -26,9 +26,9 @@ convert-video: build .check-vars
 	$(DOCKER) rm -f $(RUNTIME_CONTAINER_NAME) || true
 	$(DOCKER) run --name $(RUNTIME_CONTAINER_NAME) -dt $(IMAGE_VERSION)
 	$(DOCKER) exec -it $(RUNTIME_CONTAINER_NAME) /app/download_video.sh $(url)
-	$(DOCKER) cp $(RUNTIME_CONTAINER_NAME):/home/user/downloaded_video.mkv /home/$(USER)/Downloads/$(name).mkv
+	$(DOCKER) cp $(RUNTIME_CONTAINER_NAME):/home/user/downloaded_video.mkv $(HOME)/Downloads/$(name).mkv
 	$(DOCKER) rm -f $(RUNTIME_CONTAINER_NAME)
-	echo "Your file is available here: /home/$(USER)/Downloads/$(name).mkv"
+	echo "Your file is available here: $(HOME)/Downloads/$(name).mkv"
 
 .check-vars:
 	@[ "$(url)" ] || ( echo ">> url variable is not set"; exit 1 )
